@@ -38,18 +38,6 @@ func RunPartOne(input string) int {
 	return sum
 }
 
-var numbers = []string{
-	"one",
-	"two",
-	"three",
-	"four",
-	"five",
-	"six",
-	"seven",
-	"eight",
-	"nine",
-}
-
 var numberWords = map[string]string{
 	"one":   "1",
 	"two":   "2",
@@ -62,93 +50,46 @@ var numberWords = map[string]string{
 	"nine":  "9",
 }
 
-func filterPrefix(prefix string) (ret []string) {
-	for _, number := range numbers {
-		if strings.HasPrefix(number, prefix) {
-			ret = append(ret, number)
-		}
-	}
-	return
-}
-
-func filterSuffix(suffix string) (ret []string) {
-	for _, number := range numbers {
-		if strings.HasSuffix(number, suffix) {
-			ret = append(ret, number)
-		}
-	}
-	return
-}
-
-func checkCharacter(char string, search string, isPrefix bool) (string, string) {
-	var numbers []string
-	if isPrefix {
-		search = search + char
-		numbers = filterPrefix(search)
-		if len(numbers) == 0 {
-			search = char
-			numbers = filterPrefix(search)
-		}
-	} else {
-		search = char + search
-		numbers = filterSuffix(search)
-		if len(numbers) == 0 {
-			search = char
-			numbers = filterSuffix(search)
-		}
-	}
-
-	if len(numbers) > 1 {
-		return "", search
-	}
-
-	if len(numbers) == 1 {
-		if numbers[0] == search {
-			return numbers[0], ""
-		} else {
-			return "", search
-		}
-	}
-
-	return "", ""
-}
-
 func ExtractDigits2(line string) int {
-	characters := strings.Split(line, "")
-	j := len(line) - 1
+
 	var firstDigit string
 	var lastDigit string
-	var prefix string
-	var suffix string
-	for i := 0; i < len(characters); i++ {
-		_, errI := strconv.Atoi(characters[i])
-		if firstDigit == "" {
-			if errI == nil {
-				firstDigit = characters[i]
-			} else {
-				numberWord, newPrefix := checkCharacter(characters[i], prefix, true)
-				if numberWord != "" {
-					firstDigit = numberWords[numberWord]
-				}
-				prefix = newPrefix
-			}
+
+	var firstDigitIdx int = len(line)
+	var lastDigitIdx int = -1
+
+	for word, number := range numberWords {
+		firstIdx := strings.Index(line, word)
+		if firstIdx >= 0 && firstIdx < firstDigitIdx {
+			firstDigit = number
+			firstDigitIdx = firstIdx
 		}
 
-		_, errJ := strconv.Atoi(characters[j])
-		if lastDigit == "" {
-			if errJ == nil {
-				lastDigit = characters[j]
-			} else {
-				numberWord, newSuffix := checkCharacter(characters[j], suffix, false)
-				if numberWord != "" {
-					lastDigit = numberWords[numberWord]
-				}
-				suffix = newSuffix
-			}
+		lastIdx := strings.LastIndex(line, word)
+		if lastIdx >= 0 && lastIdx > lastDigitIdx {
+			lastDigit = number
+			lastDigitIdx = lastIdx
 		}
-
-		j--
 	}
+
+	characters := strings.Split(line, "")
+
+	for i, char := range characters {
+		_, err := strconv.Atoi(char)
+		if err != nil {
+			continue
+		}
+
+		if i < firstDigitIdx {
+			firstDigit = char
+			firstDigitIdx = i
+		}
+		if i > lastDigitIdx {
+			lastDigit = char
+			lastDigitIdx = i
+		}
+	}
+
 	digits, err := strconv.Atoi(firstDigit + lastDigit)
 	if err != nil {
 		return 0
