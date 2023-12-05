@@ -70,6 +70,8 @@ func TestExtractDigits2(t *testing.T) {
 		{"zoneight234 should be 14", "zoneight234", 14},
 		{"7pqrstsixteen should be 76", "7pqrstsixteen", 76},
 		{"abc should be 0", "abx", 0},
+		{"oneightwonethree should be 13", "oneightwonethree", 13},
+		{"ssevenine eightwoo should be 72", "sevenine eightwo", 72},
 	}
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {

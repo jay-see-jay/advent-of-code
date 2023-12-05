@@ -7,7 +7,6 @@ import (
 )
 
 func One(part int) {
-	fmt.Printf("%d\n", part)
 	b, err := os.ReadFile("./days/one/input.txt")
 	if err != nil {
 		panic("Failed to open file")
