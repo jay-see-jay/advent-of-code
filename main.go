@@ -8,17 +8,28 @@ import (
 
 func main() {
 	args := os.Args
-	if len(args) != 2 {
-		panic("Please pass just one argument")
+	if len(args) < 2 || len(args) > 3 {
+		panic("Please pass either one or two arguments")
 	}
 	day, err := strconv.Atoi(args[1])
 	if err != nil {
 		panic("Argument was not a valid integer")
 	}
 
+	var part int
+	if len(args) == 3 {
+		num, err := strconv.Atoi(args[2])
+		if err != nil || (num < 1 || num > 2) {
+			panic("Argument was not a valid integer")
+		}
+		part = num
+	} else {
+		part = 1
+	}
+
 	switch day {
 	case 1:
-		days.One()
+		days.One(part)
 	default:
 		panic("Please pass a valid day")
 	}

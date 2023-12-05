@@ -6,12 +6,20 @@ import (
 	"os"
 )
 
-func One() {
+func One(part int) {
+	fmt.Printf("%d\n", part)
 	b, err := os.ReadFile("./days/one/input.txt")
 	if err != nil {
 		panic("Failed to open file")
 	}
-	sum := one.Run(string(b))
-	fmt.Printf("Sum: %d\n", sum)
-	return
+	if part == 1 {
+		sum := one.RunPartOne(string(b))
+		fmt.Printf("Sum (Part 1): %d\n", sum)
+		return
+	}
+
+	if part == 2 {
+		sum := one.RunPartTwo(string(b))
+		fmt.Printf("Sum (Part 2): %d\n", sum)
+	}
 }
