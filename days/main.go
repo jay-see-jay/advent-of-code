@@ -3,6 +3,7 @@ package days
 import (
 	"fmt"
 	"jayseejay/advent-of-code-23/days/one"
+	"jayseejay/advent-of-code-23/days/two"
 	"os"
 )
 
@@ -20,5 +21,11 @@ func One(part int) {
 	if part == 2 {
 		sum := one.RunPartTwo(string(b))
 		fmt.Printf("Sum (Part 2): %d\n", sum)
+	}
+}
+
+func Two(part int) {
+	if part == 1 {
+		two.RunPartOne()
 	}
 }

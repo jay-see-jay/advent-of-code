@@ -30,6 +30,8 @@ func main() {
 	switch day {
 	case 1:
 		days.One(part)
+	case 2:
+		days.Two(part)
 	default:
 		panic("Please pass a valid day")
 	}
