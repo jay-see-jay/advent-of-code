@@ -29,18 +29,27 @@ func extractSets(game string) []string {
 	return strings.Split(setsString, "; ")
 }
 
+func extractBlocks(set string) []string {
+	return strings.Split(set, ", ")
+}
+
+func extractCountAndColor(block string) (int, string) {
+	split := strings.Split(block, " ")
+	count, err := strconv.Atoi(split[0])
+	if err != nil {
+		fmt.Printf("Could not find count of blocks")
+		count = 0
+	}
+	return count, split[1]
+}
+
 func isGameValid(game string) bool {
 	sets := extractSets(game)
 	for _, set := range sets {
-		colors := strings.Split(set, ", ")
-		for _, color := range colors {
-			split := strings.Split(color, " ")
-			count, err := strconv.Atoi(split[0])
-			if err != nil {
-				fmt.Printf("Could not find count of blocks")
-				continue
-			}
-			if count > maxCubes[split[1]] {
+		blocks := extractBlocks(set)
+		for _, block := range blocks {
+			count, color := extractCountAndColor(block)
+			if count > maxCubes[color] {
 				return false
 			}
 		}
@@ -57,6 +66,39 @@ func RunPartOne(input string) int {
 		if isGameValid(game) {
 			sum += gameId
 		}
+	}
+	return sum
+}
+
+func CalculatePower(game string) int {
+	sets := extractSets(game)
+	var maxColorBlocks = map[string]int{
+		"red":   0,
+		"green": 0,
+		"blue":  0,
+	}
+	for _, set := range sets {
+		blocks := extractBlocks(set)
+		for _, block := range blocks {
+			count, color := extractCountAndColor(block)
+			if maxColorBlocks[color] < count {
+				maxColorBlocks[color] = count
+			}
+		}
+	}
+	var power int = 1
+	for _, maxCount := range maxColorBlocks {
+		power *= maxCount
+	}
+	return power
+}
+
+func RunPartTwo(input string) int {
+	games := strings.Split(input, "\n")
+	var sum int
+	for _, game := range games {
+		power := CalculatePower(game)
+		sum += power
 	}
 	return sum
 }

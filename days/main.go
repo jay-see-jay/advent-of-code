@@ -33,4 +33,9 @@ func Two(part int) {
 		sum := two.RunPartOne(string(b))
 		fmt.Printf("Day 2, Part 1\nSum: %d\n", sum)
 	}
+
+	if part == 2 {
+		sum := two.RunPartTwo(string(b))
+		fmt.Printf("Day 2, Part 2\nSum: %d\n", sum)
+	}
 }
