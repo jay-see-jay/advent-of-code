@@ -54,6 +54,7 @@ func Three(part int) {
 	}
 
 	if part == 2 {
-		fmt.Printf("Implement me!")
+		sum := three.RunPartTwo(string(b))
+		fmt.Printf("Day 3, Part 2\nSum: %d\n", sum)
 	}
 }
