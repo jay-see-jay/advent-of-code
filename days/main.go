@@ -5,6 +5,7 @@ import (
 	"jayseejay/advent-of-code-23/days/1"
 	"jayseejay/advent-of-code-23/days/2"
 	"jayseejay/advent-of-code-23/days/3"
+	"jayseejay/advent-of-code-23/days/4"
 	"os"
 )
 
@@ -56,5 +57,22 @@ func Three(part int) {
 	if part == 2 {
 		sum := three.RunPartTwo(string(b))
 		fmt.Printf("Day 3, Part 2\nSum: %d\n", sum)
+	}
+}
+
+func Four(part int) {
+	b, err := os.ReadFile("./days/4/input.txt")
+	if err != nil {
+		panic("Failed to open file")
+	}
+
+	if part == 1 {
+		sum := four.RunPartOne(string(b))
+		fmt.Printf("Day 4, Part 1\nSum: %d\n", sum)
+	}
+
+	if part == 2 {
+		sum := four.RunPartTwo(string(b))
+		fmt.Printf("Day 4, Part 2\nSum: %d\n", sum)
 	}
 }

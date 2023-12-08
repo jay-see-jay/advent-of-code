@@ -34,6 +34,8 @@ func main() {
 		days.Two(part)
 	case 3:
 		days.Three(part)
+	case 4:
+		days.Four(part)
 	default:
 		panic("Please pass a valid day")
 	}
