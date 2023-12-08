@@ -1,7 +1,6 @@
 package four_test
 
 import (
-	"fmt"
 	"jayseejay/advent-of-code-23/days/4"
 	"strings"
 	"testing"
