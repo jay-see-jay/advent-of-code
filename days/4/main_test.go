@@ -38,3 +38,10 @@ func TestCalculateCardScore(t *testing.T) {
 		})
 	}
 }
+
+func TestRunPartTwo(t *testing.T) {
+	got := four.RunPartTwo(example)
+	if got != 30 {
+		t.Errorf("RunPartTwo(Card 1: 41...) = %d, want 30", got)
+	}
+}
