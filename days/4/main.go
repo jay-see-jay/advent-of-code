@@ -1,7 +1,7 @@
 package four
 
 import (
-	"fmt"
+	"math"
 	"strings"
 )
 
@@ -71,6 +71,25 @@ func RunPartOne(input string) (sum int) {
 }
 
 func RunPartTwo(input string) int {
-	fmt.Printf("Implement me!\n")
-	return 0
+	lines := strings.Split(input, "\n")
+	cards := make(map[int]int)
+	for i := range lines {
+		cards[i] = 1
+	}
+	for i, line := range lines {
+		score := CalculateCardScore(line)
+		if score == 0 {
+			continue
+		}
+		matchedCardsCount := math.Log2(float64(score)) + 1
+		for j := 1; matchedCardsCount > 0; j++ {
+			cards[i+j] += 1 * cards[i]
+			matchedCardsCount--
+		}
+	}
+	sum := 0
+	for _, count := range cards {
+		sum += count
+	}
+	return sum
 }
