@@ -29,13 +29,15 @@ func main() {
 
 	switch day {
 	case 1:
-		days.One(part)
+		days.One(day, part)
 	case 2:
-		days.Two(part)
+		days.Two(day, part)
 	case 3:
-		days.Three(part)
+		days.Three(day, part)
 	case 4:
-		days.Four(part)
+		days.Four(day, part)
+	case 5:
+		days.Five(day, part)
 	default:
 		panic("Please pass a valid day")
 	}

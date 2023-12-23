@@ -9,70 +9,74 @@ import (
 	"os"
 )
 
-func One(part int) {
-	b, err := os.ReadFile("./days/1/input.txt")
+func openFile(day int) string {
+	var path string = fmt.Sprintf("./days/%d/input.txt", day)
+	b, err := os.ReadFile(path)
 	if err != nil {
 		panic("Failed to open file")
 	}
-	if part == 1 {
-		sum := one.RunPartOne(string(b))
-		fmt.Printf("Day 1, Part 1\nSum: %d\n", sum)
-		return
-	}
+	return string(b)
+}
 
-	if part == 2 {
-		sum := one.RunPartTwo(string(b))
-		fmt.Printf("Day 1, Part 2\nSum: %d\n", sum)
+func printResult(day int, part int, result int) {
+	fmt.Printf("Day %d, Part %d\nResult: %d\n", day, part, result)
+}
+
+func One(day int, part int) {
+	input := openFile(day)
+
+	if part == 1 {
+		sum := one.RunPartOne(input)
+		printResult(day, part, sum)
+	} else if part == 2 {
+		sum := one.RunPartTwo(input)
+		printResult(day, part, sum)
 	}
 }
 
-func Two(part int) {
-	b, err := os.ReadFile("./days/2/input.txt")
-	if err != nil {
-		panic("Failed to open file")
-	}
+func Two(day int, part int) {
+	input := openFile(day)
 
 	if part == 1 {
-		sum := two.RunPartOne(string(b))
-		fmt.Printf("Day 2, Part 1\nSum: %d\n", sum)
-	}
-
-	if part == 2 {
-		sum := two.RunPartTwo(string(b))
-		fmt.Printf("Day 2, Part 2\nSum: %d\n", sum)
+		sum := two.RunPartOne(input)
+		printResult(day, part, sum)
+	} else if part == 2 {
+		sum := two.RunPartTwo(input)
+		printResult(day, part, sum)
 	}
 }
 
-func Three(part int) {
-	b, err := os.ReadFile("./days/3/input.txt")
-	if err != nil {
-		panic("Failed to open file")
-	}
+func Three(day int, part int) {
+	input := openFile(day)
 
 	if part == 1 {
-		sum := three.RunPartOne(string(b))
-		fmt.Printf("Day 3, Part 1\nSum: %d\n", sum)
-	}
-
-	if part == 2 {
-		sum := three.RunPartTwo(string(b))
-		fmt.Printf("Day 3, Part 2\nSum: %d\n", sum)
+		sum := three.RunPartOne(input)
+		printResult(day, part, sum)
+	} else if part == 2 {
+		sum := three.RunPartTwo(input)
+		printResult(day, part, sum)
 	}
 }
 
-func Four(part int) {
-	b, err := os.ReadFile("./days/4/input.txt")
-	if err != nil {
-		panic("Failed to open file")
-	}
+func Four(day int, part int) {
+	input := openFile(day)
 
 	if part == 1 {
-		sum := four.RunPartOne(string(b))
-		fmt.Printf("Day 4, Part 1\nSum: %d\n", sum)
+		sum := four.RunPartOne(input)
+		printResult(day, part, sum)
+	} else if part == 2 {
+		sum := four.RunPartTwo(input)
+		printResult(day, part, sum)
 	}
+}
 
+func Five(day int, part int) {
+	//	input := openFile("./days/5/input.txt")
+
+	if part == 1 {
+		fmt.Printf("Day 5, Part 1\n TODO!")
+	}
 	if part == 2 {
-		sum := four.RunPartTwo(string(b))
-		fmt.Printf("Day 4, Part 2\nSum: %d\n", sum)
+		fmt.Printf("Day 5, Part 1\n TODO!")
 	}
 }
