@@ -6,6 +6,7 @@ import (
 	"jayseejay/advent-of-code-23/days/2"
 	"jayseejay/advent-of-code-23/days/3"
 	"jayseejay/advent-of-code-23/days/4"
+	five "jayseejay/advent-of-code-23/days/5"
 	"os"
 )
 
@@ -71,10 +72,11 @@ func Four(day int, part int) {
 }
 
 func Five(day int, part int) {
-	//	input := openFile("./days/5/input.txt")
+	input := openFile(day)
 
 	if part == 1 {
-		fmt.Printf("Day 5, Part 1\n TODO!")
+		result := five.RunPartOne(input)
+		printResult(day, part, result)
 	}
 	if part == 2 {
 		fmt.Printf("Day 5, Part 1\n TODO!")
