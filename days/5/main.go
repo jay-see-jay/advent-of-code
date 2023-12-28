@@ -29,98 +29,114 @@ import (
 
 // map of maps:
 
-type StartEnd struct {
-	start int
-	end   int
-}
-
 type MapRange struct {
-	source      StartEnd
-	destination StartEnd
+	sourceStart int
+	sourceEnd   int
 	modifier    int
 }
 
-var maps = make(map[string][]MapRange)
+type MapRanges = map[string][]MapRange
 
-// Go through input string to:
-// - extract seed numbers
-// -- if start of input, create list of numbers after first colon up to first \n
-// - populate `maps`
-// -- after seed numbers, two \n denotes a new map, get map key from text immediately after up to work "map:"
-// -- each subsequent new line is a map range
+func ExtractSeeds(input string) []int {
+	colonIndex := strings.Index(input, ":") + 1
+	seeds := strings.TrimSpace(input[colonIndex:])
+	seedList := strings.Split(seeds, " ")
 
-var seeds = make([]int, 0)
+	var seedIntegers []int
 
-func isNumber(char rune) bool {
-	return char >= 48 && char < 58
-}
-
-func startNewWord(char rune) bool {
-	return char == 32 || char == 10 || char == 58
-}
-
-func isNumberComplete(word string) bool {
-	if word == "" || strings.HasPrefix(word, "map") {
-		return false
-	}
-	return true
-}
-
-func readInput(input string) {
-	newLineCount := 0
-	key := ""
-	isKeyComplete := false
-	number := ""
-	for _, char := range input {
-		stringChar := string(char)
-		if char == 10 {
-			newLineCount += 1
-		} else {
-			newLineCount = 0
+	for _, seedStr := range seedList {
+		seedInteger, err := strconv.Atoi(seedStr)
+		if err != nil {
+			fmt.Printf("Failed to convert seed to integer")
+			continue
 		}
+		seedIntegers = append(seedIntegers, seedInteger)
+	}
 
-		if newLineCount == 2 {
+	return seedIntegers
+}
+
+func PopulateMaps(lines []string) MapRanges {
+	var maps = make(MapRanges)
+	var key string
+	for _, line := range lines[1:] {
+		if len(line) == 0 {
 			key = ""
-			isKeyComplete = false
-		}
-
-		if !isNumber(char) && !isKeyComplete {
-			if char == 32 || char == 58 {
-				isKeyComplete = true
-			} else {
-				key += stringChar
-			}
-		}
-
-		if !isKeyComplete {
 			continue
 		}
 
-		if !startNewWord(char) {
-			number += stringChar
+		colonIndex := strings.Index(line, ":")
+		if colonIndex >= 0 {
+			key = line[:colonIndex]
+			key = strings.Replace(key, " map", "", 1)
 			continue
 		}
 
-		if !isNumberComplete(number) {
-			number = ""
-			continue
+		rangeNumbers := strings.Split(line, " ")
+		destinationRangeStart, _ := strconv.Atoi(rangeNumbers[0])
+		sourceRangeStart, _ := strconv.Atoi(rangeNumbers[1])
+		rangeLength, _ := strconv.Atoi(rangeNumbers[2])
+		sourceRangeEnd := sourceRangeStart + rangeLength
+		modifier := destinationRangeStart - sourceRangeStart
+
+		var mapRange = MapRange{
+			sourceStart: sourceRangeStart,
+			sourceEnd:   sourceRangeEnd,
+			modifier:    modifier,
 		}
 
-		if strings.TrimSpace(key) == "seeds" {
-			seed, err := strconv.Atoi(number)
-			if err == nil {
-				fmt.Printf("Append to seeds: %d\n", seed)
-				seeds = append(seeds, seed)
-			}
-		}
-		fmt.Printf("Key: %s | Word: %s\n", strings.TrimSpace(key), strings.TrimSpace(number))
-		number = ""
+		maps[key] = append(maps[key], mapRange)
 	}
+
+	return maps
+}
+
+func readInput(input string) ([]int, MapRanges) {
+	lines := strings.Split(input, "\n")
+
+	seeds := ExtractSeeds(lines[0])
+	maps := PopulateMaps(lines)
+
+	return seeds, maps
+
+}
+
+func Map(input int, key string, maps MapRanges) int {
+	var mapRanges = maps[key]
+	for _, mapRange := range mapRanges {
+		if input >= mapRange.sourceStart && input < mapRange.sourceEnd {
+			return input + mapRange.modifier
+		}
+	}
+	return input
+}
+
+func MapSeed(seed int, maps MapRanges) int {
+	soil := Map(seed, "seed-to-soil", maps)
+	fertilizer := Map(soil, "soil-to-fertilizer", maps)
+	water := Map(fertilizer, "fertilizer-to-water", maps)
+	light := Map(water, "water-to-light", maps)
+	temperature := Map(light, "light-to-temperature", maps)
+	humidity := Map(temperature, "temperature-to-humidity", maps)
+	return Map(humidity, "humidity-to-location", maps)
+}
+
+func NearestLocation(locations []int) int {
+	var minLocation int = locations[0]
+	for _, location := range locations {
+		if location < minLocation {
+			minLocation = location
+		}
+	}
+	return minLocation
 }
 
 func RunPartOne(input string) int {
-	fmt.Printf("Seeds: %v\n", seeds)
-	readInput(input)
-	fmt.Printf("Seeds: %v", seeds)
-	return 0
+	seeds, maps := readInput(input)
+	var locations []int
+	for _, seed := range seeds {
+		location := MapSeed(seed, maps)
+		locations = append(locations, location)
+	}
+	return NearestLocation(locations)
 }

@@ -27,12 +27,13 @@ func TestRunPartTwo(t *testing.T) {
 	}
 }
 
+type Test = struct {
+	name  string
+	input string
+	want  int
+}
+
 func TestCalculatePower(t *testing.T) {
-	type Test = struct {
-		name  string
-		input string
-		want  int
-	}
 	var tests = []Test{
 		{"Game 1 should be 48", "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green", 48},
 		{"Game 2 should be 12", "Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue", 12},
