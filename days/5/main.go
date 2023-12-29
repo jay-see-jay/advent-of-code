@@ -37,10 +37,14 @@ type MapRange struct {
 
 type MapRanges = map[string][]MapRange
 
-func ExtractSeeds(input string) []int {
+func extractSeedList(input string) []string {
 	colonIndex := strings.Index(input, ":") + 1
 	seeds := strings.TrimSpace(input[colonIndex:])
-	seedList := strings.Split(seeds, " ")
+	return strings.Split(seeds, " ")
+}
+
+func ExtractSeeds(input string) []int {
+	seedList := extractSeedList(input)
 
 	var seedIntegers []int
 
@@ -51,6 +55,31 @@ func ExtractSeeds(input string) []int {
 			continue
 		}
 		seedIntegers = append(seedIntegers, seedInteger)
+	}
+
+	return seedIntegers
+}
+
+func ExtractSeedsPart2(input string) []int {
+	seedList := extractSeedList(input)
+
+	var seedIntegers []int
+
+	for i := 0; i < len(seedList); i += 2 {
+		start, err := strconv.Atoi(seedList[i])
+		if err != nil {
+			continue
+		}
+		count, err := strconv.Atoi(seedList[i+1])
+		if err != nil {
+			continue
+		}
+
+		for count > 0 {
+			seedIntegers = append(seedIntegers, start)
+			start++
+			count--
+		}
 	}
 
 	return seedIntegers
@@ -91,16 +120,6 @@ func PopulateMaps(lines []string) MapRanges {
 	return maps
 }
 
-func readInput(input string) ([]int, MapRanges) {
-	lines := strings.Split(input, "\n")
-
-	seeds := ExtractSeeds(lines[0])
-	maps := PopulateMaps(lines)
-
-	return seeds, maps
-
-}
-
 func Map(input int, key string, maps MapRanges) int {
 	var mapRanges = maps[key]
 	for _, mapRange := range mapRanges {
@@ -121,9 +140,10 @@ func MapSeed(seed int, maps MapRanges) int {
 	return Map(humidity, "humidity-to-location", maps)
 }
 
-func NearestLocation(locations []int) int {
-	var minLocation int = locations[0]
-	for _, location := range locations {
+func NearestLocation(seeds []int, maps MapRanges) int {
+	var minLocation int = MapSeed(seeds[0], maps)
+	for _, seed := range seeds[1:] {
+		location := MapSeed(seed, maps)
 		if location < minLocation {
 			minLocation = location
 		}
@@ -132,11 +152,18 @@ func NearestLocation(locations []int) int {
 }
 
 func RunPartOne(input string) int {
-	seeds, maps := readInput(input)
-	var locations []int
-	for _, seed := range seeds {
-		location := MapSeed(seed, maps)
-		locations = append(locations, location)
-	}
-	return NearestLocation(locations)
+	lines := strings.Split(input, "\n")
+
+	seeds := ExtractSeeds(lines[0])
+	maps := PopulateMaps(lines)
+
+	return NearestLocation(seeds, maps)
+}
+
+func RunPartTwo(input string) int {
+	lines := strings.Split(input, "\n")
+	seeds := ExtractSeedsPart2(lines[0])
+	maps := PopulateMaps(lines)
+
+	return NearestLocation(seeds, maps)
 }

@@ -138,8 +138,11 @@ func TestMap(t *testing.T) {
 }
 
 func TestNearestLocation(t *testing.T) {
-	var locations = []int{82, 43, 86, 35}
-	got := five.NearestLocation(locations)
+	lines := strings.Split(example, "\n")
+	seeds := five.ExtractSeeds(lines[0])
+	maps := five.PopulateMaps(lines)
+
+	got := five.NearestLocation(seeds, maps)
 
 	if got != 35 {
 		t.Errorf("NearestLocation([82, 43, 86, 35]) = %v, want 35", got)
@@ -153,6 +156,7 @@ func TestExtractSeeds(t *testing.T) {
 
 	if len(got) != len(seeds) {
 		t.Errorf("ExtractSeeds(seeds: 79 14...) = %v, want [79, 14, 55, 13]", got)
+		return
 	}
 
 	for i, item := range got {
@@ -162,10 +166,35 @@ func TestExtractSeeds(t *testing.T) {
 	}
 }
 
+func TestExtractSeedsPart2(t *testing.T) {
+	got := five.ExtractSeedsPart2("seeds: 79 14 55 13")
+
+	seeds := []int{79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67}
+
+	if len(got) != len(seeds) {
+		t.Errorf("ExtractSeedsPart2(seeds: 79 14...) = %v, want [79, ..., 92, 55, ..., 67]", got)
+		return
+	}
+
+	for i, item := range got {
+		if seeds[i] != item {
+			t.Errorf("ExtractSeedsPart2(seeds: 79 14...) = %v, want [79, ..., 92, 55, ..., 67]", got)
+		}
+	}
+}
+
 func TestRunPartOne(t *testing.T) {
 	got := five.RunPartOne(example)
 
 	if got != 35 {
-		t.Errorf("RunPartOne(seeds: 79 14...) = %d, want 0", got)
+		t.Errorf("RunPartOne(seeds: 79 14...) = %d, want 35", got)
+	}
+}
+
+func TestRunPartTwo(t *testing.T) {
+	got := five.RunPartTwo(example)
+
+	if got != 46 {
+		t.Errorf("RunPartTwo(seeds: 79 14...) = %d, want 46", got)
 	}
 }

@@ -79,6 +79,7 @@ func Five(day int, part int) {
 		printResult(day, part, result)
 	}
 	if part == 2 {
-		fmt.Printf("Day 5, Part 1\n TODO!")
+		result := five.RunPartTwo(input)
+		printResult(day, part, result)
 	}
 }
