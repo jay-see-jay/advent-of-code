@@ -2,9 +2,10 @@ package five_test
 
 import (
 	"fmt"
-	five "jayseejay/advent-of-code/years/2023/days/5"
 	"strings"
 	"testing"
+
+	"github.com/jayseejay/advent-of-code/years/2023/days/five"
 )
 
 var example string = `seeds: 79 14 55 13

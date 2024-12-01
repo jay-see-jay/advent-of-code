@@ -1,9 +1,10 @@
 package four_test
 
 import (
-	"jayseejay/advent-of-code/years/2023/days/4"
 	"strings"
 	"testing"
+
+	"github.com/jayseejay/advent-of-code/years/2023/days/four"
 )
 
 var example = `Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53

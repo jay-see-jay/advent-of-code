@@ -2,21 +2,32 @@ package main
 
 import (
 	"flag"
-	"jayseejay/advent-of-code/years/2023/days"
+
+	twenty_three "github.com/jayseejay/advent-of-code/years/2023/days"
+	twenty_four "github.com/jayseejay/advent-of-code/years/twenty_four"
 )
 
 func twenty23(day int, part int) {
 	switch day {
 	case 1:
-		days.One(day, part)
+		twenty_three.One(day, part)
 	case 2:
-		days.Two(day, part)
+		twenty_three.Two(day, part)
 	case 3:
-		days.Three(day, part)
+		twenty_three.Three(day, part)
 	case 4:
-		days.Four(day, part)
+		twenty_three.Four(day, part)
 	case 5:
-		days.Five(day, part)
+		twenty_three.Five(day, part)
+	default:
+		panic("Please pass a valid day")
+	}
+}
+
+func twenty24(day int, part int) {
+	switch day {
+	case 1:
+		twenty_four.One(day, part)
 	default:
 		panic("Please pass a valid day")
 	}
@@ -31,7 +42,7 @@ func main() {
 
 	switch *year {
 	case 2024:
-		panic("No implementations for 2024")
+		twenty24(*day, *part)
 	case 2023:
 		twenty23(*day, *part)
 	default:

@@ -1,8 +1,9 @@
 package two_test
 
 import (
-	"jayseejay/advent-of-code/years/2023/days/2"
 	"testing"
+
+	"github.com/jayseejay/advent-of-code/years/2023/days/two"
 )
 
 var example = `Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
