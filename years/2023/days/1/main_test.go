@@ -1,7 +1,7 @@
 package one_test
 
 import (
-	"jayseejay/advent-of-code-23/days/1"
+	"jayseejay/advent-of-code/years/2023/days/1"
 	"strconv"
 	"testing"
 )

@@ -1,7 +1,7 @@
 package two_test
 
 import (
-	"jayseejay/advent-of-code-23/days/2"
+	"jayseejay/advent-of-code/years/2023/days/2"
 	"testing"
 )
 

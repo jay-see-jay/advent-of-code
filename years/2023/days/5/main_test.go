@@ -2,7 +2,7 @@ package five_test
 
 import (
 	"fmt"
-	five "jayseejay/advent-of-code-23/days/5"
+	five "jayseejay/advent-of-code/years/2023/days/5"
 	"strings"
 	"testing"
 )

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"jayseejay/advent-of-code-23/days"
+	"jayseejay/advent-of-code/years/2023/days"
 	"os"
 	"strconv"
 )

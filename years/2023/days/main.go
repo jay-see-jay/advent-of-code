@@ -2,16 +2,16 @@ package days
 
 import (
 	"fmt"
-	"jayseejay/advent-of-code-23/days/1"
-	"jayseejay/advent-of-code-23/days/2"
-	"jayseejay/advent-of-code-23/days/3"
-	"jayseejay/advent-of-code-23/days/4"
-	five "jayseejay/advent-of-code-23/days/5"
+	"jayseejay/advent-of-code/years/2023/days/1"
+	"jayseejay/advent-of-code/years/2023/days/2"
+	"jayseejay/advent-of-code/years/2023/days/3"
+	"jayseejay/advent-of-code/years/2023/days/4"
+	"jayseejay/advent-of-code/years/2023/days/5"
 	"os"
 )
 
 func openFile(day int) string {
-	var path string = fmt.Sprintf("./days/%d/input.txt", day)
+	var path string = fmt.Sprintf("./years/2023/days/%d/input.txt", day)
 	b, err := os.ReadFile(path)
 	if err != nil {
 		panic("Failed to open file")

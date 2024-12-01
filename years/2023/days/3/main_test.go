@@ -1,7 +1,7 @@
 package three_test
 
 import (
-	"jayseejay/advent-of-code-23/days/3"
+	"jayseejay/advent-of-code/years/2023/days/3"
 	"testing"
 )
 
