@@ -3,7 +3,7 @@ package three_test
 import (
 	"testing"
 
-	"github.com/jayseejay/advent-of-code/years/2023/days/three"
+	"github.com/jayseejay/advent-of-code/years/twenty_three/three"
 )
 
 var example = `467..114..

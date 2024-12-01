@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/jayseejay/advent-of-code/years/2023/days/five"
+	"github.com/jayseejay/advent-of-code/years/twenty_three/five"
 )
 
 var example string = `seeds: 79 14 55 13

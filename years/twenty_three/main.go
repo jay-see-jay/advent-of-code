@@ -1,14 +1,14 @@
-package days
+package twenty_three
 
 import (
 	"fmt"
 	"os"
 
-	"github.com/jayseejay/advent-of-code/years/2023/days/five"
-	"github.com/jayseejay/advent-of-code/years/2023/days/four"
-	"github.com/jayseejay/advent-of-code/years/2023/days/one"
-	"github.com/jayseejay/advent-of-code/years/2023/days/three"
-	"github.com/jayseejay/advent-of-code/years/2023/days/two"
+	"github.com/jayseejay/advent-of-code/years/twenty_three/five"
+	"github.com/jayseejay/advent-of-code/years/twenty_three/four"
+	"github.com/jayseejay/advent-of-code/years/twenty_three/one"
+	"github.com/jayseejay/advent-of-code/years/twenty_three/three"
+	"github.com/jayseejay/advent-of-code/years/twenty_three/two"
 )
 
 func openFile(day int) string {

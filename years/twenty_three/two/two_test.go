@@ -3,7 +3,7 @@ package two_test
 import (
 	"testing"
 
-	"github.com/jayseejay/advent-of-code/years/2023/days/two"
+	"github.com/jayseejay/advent-of-code/years/twenty_three/two"
 )
 
 var example = `Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green

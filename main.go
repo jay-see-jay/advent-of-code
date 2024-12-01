@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 
-	twenty_three "github.com/jayseejay/advent-of-code/years/2023/days"
 	twenty_four "github.com/jayseejay/advent-of-code/years/twenty_four"
+	twenty_three "github.com/jayseejay/advent-of-code/years/twenty_three"
 )
 
 func twenty23(day int, part int) {

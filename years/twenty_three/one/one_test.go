@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/jayseejay/advent-of-code/years/2023/days/one"
+	"github.com/jayseejay/advent-of-code/years/twenty_three/one"
 )
 
 func TestRunPartOne(t *testing.T) {
