@@ -1,32 +1,11 @@
 package main
 
 import (
+	"flag"
 	"jayseejay/advent-of-code/years/2023/days"
-	"os"
-	"strconv"
 )
 
-func main() {
-	args := os.Args
-	if len(args) < 2 || len(args) > 3 {
-		panic("Please pass either one or two arguments")
-	}
-	day, err := strconv.Atoi(args[1])
-	if err != nil {
-		panic("Argument was not a valid integer")
-	}
-
-	var part int
-	if len(args) == 3 {
-		num, err := strconv.Atoi(args[2])
-		if err != nil || (num < 1 || num > 2) {
-			panic("Argument was not a valid integer")
-		}
-		part = num
-	} else {
-		part = 1
-	}
-
+func twenty23(day int, part int) {
 	switch day {
 	case 1:
 		days.One(day, part)
@@ -40,5 +19,22 @@ func main() {
 		days.Five(day, part)
 	default:
 		panic("Please pass a valid day")
+	}
+}
+
+func main() {
+	year := flag.Int("year", 2024, "The year of the Advent of Code challenge")
+	day := flag.Int("day", 1, "The day of the challenge")
+	part := flag.Int("part", 1, "Part 1 or 2 of the day's challenge?")
+
+	flag.Parse()
+
+	switch *year {
+	case 2024:
+		panic("No implementations for 2024")
+	case 2023:
+		twenty23(*day, *part)
+	default:
+		panic("Please pass a valid year")
 	}
 }

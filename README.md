@@ -17,7 +17,3 @@ To run tests for all packages, call:
 ```
 go test ./...
 ```
-
----
-
-> I will not use an LLM, else I will not learn
