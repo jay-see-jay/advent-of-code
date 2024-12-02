@@ -10,7 +10,7 @@ import (
 )
 
 func One(day int, part int) {
-	input := years.OpenFile(day)
+	input := years.OpenFile(2023, day)
 
 	if part == 1 {
 		sum := one.RunPartOne(input)
@@ -22,7 +22,7 @@ func One(day int, part int) {
 }
 
 func Two(day int, part int) {
-	input := years.OpenFile(day)
+	input := years.OpenFile(2023, day)
 
 	if part == 1 {
 		sum := two.RunPartOne(input)
@@ -34,7 +34,7 @@ func Two(day int, part int) {
 }
 
 func Three(day int, part int) {
-	input := years.OpenFile(day)
+	input := years.OpenFile(2023, day)
 
 	if part == 1 {
 		sum := three.RunPartOne(input)
@@ -46,7 +46,7 @@ func Three(day int, part int) {
 }
 
 func Four(day int, part int) {
-	input := years.OpenFile(day)
+	input := years.OpenFile(2023, day)
 
 	if part == 1 {
 		sum := four.RunPartOne(input)
@@ -58,7 +58,7 @@ func Four(day int, part int) {
 }
 
 func Five(day int, part int) {
-	input := years.OpenFile(day)
+	input := years.OpenFile(2023, day)
 
 	if part == 1 {
 		result := five.RunPartOne(input)

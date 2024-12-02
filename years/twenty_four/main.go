@@ -6,6 +6,12 @@ import (
 )
 
 func One(day int, part int) {
-	sum := one.RunPartOne("")
+	input := years.OpenFile(2024, day)
+	var sum int
+	if part == 1 {
+		sum = one.RunPartOne(input)
+	} else {
+		panic("Part 2 is not yet implemented")
+	}
 	years.PrintResult(day, part, sum)
 }

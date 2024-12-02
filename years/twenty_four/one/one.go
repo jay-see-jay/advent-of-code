@@ -2,7 +2,10 @@ package one
 
 import (
 	"container/heap"
+	"math"
+	"strconv"
 	"strings"
+	"text/scanner"
 )
 
 type MinHeap []int
@@ -31,17 +34,52 @@ func (h *MinHeap) Pop() any {
 	return x
 }
 
+func MeasureDistance(first int, second int) int {
+	difference := math.Abs(float64(first) - float64(second))
+	return int(difference)
+}
+
 func RunPartOne(input string) int {
-	lines := strings.Split(input, "\n")
 	leftHeap := &MinHeap{}
 	rightHeap := &MinHeap{}
 
 	heap.Init(leftHeap)
 	heap.Init(rightHeap)
 
-	for _, line := range lines {
-		print(line)
+	var s scanner.Scanner
+	s.Init(strings.NewReader(input))
+	s.Mode = scanner.ScanInts
+	s.Whitespace = 1<<' ' | 1<<'\t' | 1<<'\n' | 1<<'.'
+
+	isLeft := true
+
+	for tok := s.Scan(); tok != scanner.EOF; tok = s.Scan() {
+		num, err := strconv.Atoi(s.TokenText())
+		if err != nil {
+			continue
+		}
+
+		if isLeft {
+			heap.Push(leftHeap, num)
+		} else {
+			heap.Push(rightHeap, num)
+		}
+
+		isLeft = !isLeft
 	}
 
-	return 1
+	if leftHeap.Len() != rightHeap.Len() {
+		panic("Left and right lists are not of the same length")
+	}
+
+	sum := 0
+
+	for leftHeap.Len() > 0 {
+		leftValue := heap.Pop(leftHeap).(int)
+		rightValue := heap.Pop(rightHeap).(int)
+
+		sum += MeasureDistance(leftValue, rightValue)
+	}
+
+	return sum
 }
