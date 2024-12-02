@@ -83,3 +83,47 @@ func RunPartOne(input string) int {
 
 	return sum
 }
+
+func RunPartTwo(input string) int {
+	var s scanner.Scanner
+	s.Init(strings.NewReader(input))
+	s.Mode = scanner.ScanInts
+	s.Whitespace = 1<<' ' | 1<<'\t' | 1<<'\n' | 1<<'.'
+
+	isLeft := true
+
+	leftCount := map[int]int{}
+	var leftValues []int
+	var rightValues []int
+
+	for tok := s.Scan(); tok != scanner.EOF; tok = s.Scan() {
+		num, err := strconv.Atoi(s.TokenText())
+		if err != nil {
+			continue
+		}
+
+		if isLeft {
+			leftCount[num] = 0
+			leftValues = append(leftValues, num)
+		} else {
+			rightValues = append(rightValues, num)
+		}
+
+		isLeft = !isLeft
+	}
+
+	for i := 0; i < len(rightValues); i++ {
+		val, ok := leftCount[rightValues[i]]
+		if ok {
+			leftCount[rightValues[i]] = val + 1
+		}
+	}
+
+	sum := 0
+	for _, v := range leftValues {
+		frequency := leftCount[v]
+		sum += frequency * v
+	}
+
+	return sum
+}

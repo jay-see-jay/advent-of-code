@@ -44,3 +44,16 @@ func TestMeasureDistance(t *testing.T) {
 		})
 	}
 }
+
+func TestRunPartTwo(t *testing.T) {
+	var example = `3   4
+4   3
+2   5
+1   3
+3   9
+3   3`
+	got := one.RunPartTwo(example)
+	if got != 31 {
+		t.Errorf("RunPartTwo(3 4, 4 3...) = %d, want 31", got)
+	}
+}

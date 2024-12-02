@@ -11,7 +11,7 @@ func One(day int, part int) {
 	if part == 1 {
 		sum = one.RunPartOne(input)
 	} else {
-		panic("Part 2 is not yet implemented")
+		sum = one.RunPartTwo(input)
 	}
 	years.PrintResult(day, part, sum)
 }
