@@ -28,6 +28,8 @@ func twenty24(day int, part int) {
 	switch day {
 	case 1:
 		twenty_four.One(day, part)
+	case 2:
+		twenty_four.Two(day, part)
 	default:
 		panic("Please pass a valid day")
 	}
