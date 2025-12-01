@@ -1,0 +1,20 @@
+import sys
+from one.one import handle11, handle12
+
+if __name__ == "__main__":
+    day = int(sys.argv[1])
+    part = int(sys.argv[2])
+
+    match day:
+        case 1: 
+            if part == 1:
+                print(f"Running day {day}, part one")
+                handle11()
+            elif part == 2:
+                print(f"Running day {day}, part two")
+                handle12()
+            else:
+                print("There are no other parts!")
+        case _:
+            print(f"Day {day} is not yet implemented")
+
