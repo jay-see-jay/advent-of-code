@@ -27,8 +27,8 @@ func TestIsReportSafe(t *testing.T) {
 		want  bool
 	}{
 		{"7 6 4 2 1 should be safe", []string{"7", "6", "4", "2", "1"}, true},
-		{"1 2 7 8 9 should be unsafe", []string{"1", "2", "7", "8", "9"}, false},
 		{"9 7 6 2 1 should be unsafe", []string{"9", "7", "6", "2", "1"}, false},
+		{"1 2 7 8 9 should be unsafe", []string{"1", "2", "7", "8", "9"}, false},
 		{"1 3 2 4 5 should be unsafe", []string{"1", "3", "2", "4", "5"}, false},
 		{"8 6 4 4 1 should be unsafe", []string{"8", "6", "4", "4", "1"}, false},
 		{"1 3 6 7 9 should be safe", []string{"1", "3", "6", "7", "9"}, true},
