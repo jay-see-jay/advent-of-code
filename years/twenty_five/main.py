@@ -2,12 +2,14 @@ import sys
 from one.one import handle11, handle12
 from two import handle21, handle22
 from three import handle31, handle32
+from four import handle41, handle42
 from utils import Logger
 
 if __name__ == "__main__":
     day = int(sys.argv[1])
     part = int(sys.argv[2])
     is_debug = len(sys.argv) > 3 and sys.argv[3] == "debug"
+    is_test = len(sys.argv) > 4 and sys.argv[4] == "test"
 
     if is_debug:
         print("Running in debug")
@@ -40,6 +42,15 @@ if __name__ == "__main__":
             elif part == 2:
                 print(f"Running day {day}, part two")
                 handle32(logger)
+            else:
+                print("There are no other parts!")
+        case 4:
+            if part == 1:
+                print(f"Running day {day}, part one")
+                handle41(logger, is_test)
+            elif part == 2:
+                print(f"Running day {day}, part two")
+                handle42(logger, is_test)
             else:
                 print("There are no other parts!")
 

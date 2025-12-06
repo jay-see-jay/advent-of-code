@@ -1,0 +1,107 @@
+from utils import Logger
+
+# There must be < 4 rolls of paper in the 8
+# adjacent positions.
+
+# 4 adjacent rolls
+# .@. .1.
+# @@. 2@.
+# .@@ .34
+
+# How many rolls of paper can be accessed by a forklift?
+
+# 1. Load input into a matrix
+# 2. Define directions: up, down, left, right
+# 3. Iterate through matrix and check in circle around
+#    to count number of adjacent rolls.
+
+# [-1, -1] - move to top-left corner
+# [0, 1] - top-middle
+# [0, 1] - top-right
+# [1, 0] - middle-right
+# [1, 0] - bottom-right
+# [0, -1] - bottom-middle
+# [0, -1] - bottom-left
+# [-1, 0] - middle-left
+
+
+class PaperRollMap:
+    def __init__(self):
+        self.grid = []
+        self.w = 0
+        self.h = 0
+        self.moves = [
+            [-1, -1],
+            [0, 1],
+            [0, 1],
+            [1, 0],
+            [1, 0],
+            [0, -1],
+            [0, -1],
+            [-1, 0]
+        ]
+
+    def add_row(self, row: str):
+        self.grid.append(row)
+        self.h += 1
+        if self.w < len(row):
+            self.w = len(row)
+
+    def move(self, pos, dir):
+        return [pos[0] + dir[0], pos[1] + dir[1]]
+
+    def is_out_of_bounds(self, pos):
+        if (
+                pos[0] < 0 or
+                pos[1] < 0 or
+                pos[0] > self.h - 1 or
+                pos[1] > self.w - 1):
+            return True
+        else:
+            return False
+
+    def count_adjacent_rolls(self, r, c) -> bool:
+        count = 0
+
+        curr_pos = [r, c]
+
+        for i in range(len(self.moves)):
+            curr_pos = self.move(curr_pos, self.moves[i])
+            if self.is_out_of_bounds(curr_pos):
+                continue
+
+            contents = self.grid[curr_pos[0]][curr_pos[1]]
+            if contents == "@":
+                count += 1
+
+        return count < 4
+
+    def count_accessible(self):
+        total_count = 0
+        for r in range(len(self.grid)):
+            for c in range(len(self.grid[r])):
+                is_accessible = self.count_adjacent_rolls(r, c)
+                if is_accessible:
+                    total_count += 1
+
+        return total_count
+
+
+def process_input(logger: Logger, is_test=False):
+
+    map = PaperRollMap()
+    input_file = "test" if is_test else "input"
+
+    with open(f"./years/twenty_five/four/{input_file}.txt") as input:
+        while line := input.readline():
+            map.add_row(line)
+
+    print(*map.grid)
+
+    answer = map.count_accessible()
+
+    print(f"Answer: {answer}")
+
+
+def handle41(logger: Logger, is_test=False):
+    process_input(logger, is_test)
