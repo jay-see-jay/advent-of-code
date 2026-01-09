@@ -3,6 +3,7 @@ from one.one import handle11, handle12
 from two import handle21, handle22
 from three import handle31, handle32
 from four import handle41, handle42
+from five import handle51, handle52
 from utils import Logger
 
 if __name__ == "__main__":
@@ -51,6 +52,15 @@ if __name__ == "__main__":
             elif part == 2:
                 print(f"Running day {day}, part two")
                 handle42(logger, is_test)
+            else:
+                print("There are no other parts!")
+        case 5:
+            if part == 1:
+                print(f"Running day {day}, part one")
+                handle51(logger, is_test)
+            elif part == 2:
+                print(f"Running day {day}, part two")
+                handle52(logger, is_test)
             else:
                 print("There are no other parts!")
 
